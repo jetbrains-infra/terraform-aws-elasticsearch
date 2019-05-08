@@ -13,6 +13,7 @@ resource "aws_elasticsearch_domain" "default" {
     instance_count           = "${local.node_amount}"
     instance_type            = "${local.node_instance_type}"
     dedicated_master_enabled = false
+    zone_awareness_enabled   = true
   }
 
   vpc_options {
