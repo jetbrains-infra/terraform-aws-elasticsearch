@@ -23,7 +23,7 @@ variable "node_disk_size" {
 
 variable "node_amount" {
   description = "Amount of cluster nodes."
-  default     = 3
+  default     = 2
 }
 
 variable "subnets" {
@@ -35,6 +35,11 @@ variable "trusted_cidr_blocks" {
   description = "A list of trusted external IP. You may provide consumer subnets."
   type        = "list"
   default     = []
+}
+
+variable "multi_az" {
+  description = "Availability zones awareness"
+  default     = true
 }
 
 data "aws_region" "current" {}
@@ -69,4 +74,5 @@ locals {
   node_amount         = "${var.node_amount}"
   subnets             = ["${var.subnets}"]
   trusted_cidr_blocks = ["${var.trusted_cidr_blocks}"]
+  multi_az            = "${var.multi_az}"
 }

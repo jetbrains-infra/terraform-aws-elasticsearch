@@ -13,8 +13,9 @@ Terraform module to run ElasticSearch cluster.
 
 * `node_disk_size` - The allocated storage in gibibytes for each cluster node. (Default is `10`)
 * `node_instance_type` - Instance type of cluster node. (Default is `t2.small.elasticsearch`)
-* `node_amount` - Amount of cluster nodes. (Default is `3`)
+* `node_amount` - Amount of cluster nodes. **NB!** the number of servers in a cluster must be a multiple of the number of networks. (Default is `2`)
 * `elasticsearch_version` - ElasticSearch version (Default is `6.5`)
+* `multi_az` - Availability zones awareness. You should provide only one subnet id in case of disabling the zone awareness. (Default is `true`)
 
 ## Usage
 
