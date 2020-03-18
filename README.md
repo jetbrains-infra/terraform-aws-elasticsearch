@@ -21,15 +21,15 @@ Terraform module to run ElasticSearch cluster.
 
 Default ElasticSearch cluster (3 `t2.small.elasticsearch` nodes):
 
-```
+```hcl
 module "example_es" {
   source              = "github.com/jetbrains-infra/terraform-aws-elasticsearch"
   project             = "FooBar"
   name                = "example"
-  db_subnets          = ["${aws_subnet.private_subnet_1.id}","${aws_subnet.private_subnet_2.id}"]
+  db_subnets          = [aws_subnet.private_subnet_1.id, aws_subnet.private_subnet_2.id]
   trusted_cidr_blocks = [
-    "${aws_subnet.public_subnet_1.cidr_block}",
-    "${aws_subnet.public_subnet_2.cidr_block}"
+    aws_subnet.public_subnet_1.cidr_block,
+    aws_subnet.public_subnet_2.cidr_block
   ]
 }
 ```

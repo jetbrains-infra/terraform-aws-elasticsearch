@@ -28,12 +28,12 @@ variable "node_amount" {
 
 variable "subnets" {
   description = "A list of VPC subnet IDs."
-  type        = "list"
+  type        = list(string)
 }
 
 variable "trusted_cidr_blocks" {
   description = "A list of trusted external IP. You may provide consumer subnets."
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
@@ -42,9 +42,11 @@ variable "multi_az" {
   default     = true
 }
 
-data "aws_region" "current" {}
+data "aws_region" "current" {
+}
 
-data "aws_caller_identity" "current" {}
+data "aws_caller_identity" "current" {
+}
 
 data "aws_iam_policy_document" "anonymous_access" {
   statement {
@@ -58,21 +60,21 @@ data "aws_iam_policy_document" "anonymous_access" {
 }
 
 data "aws_subnet" "default" {
-  id = "${local.subnets[0]}"
+  id = local.subnets[0]
 }
 
 locals {
-  project             = "${var.project}"
-  vpc_id              = "${data.aws_subnet.default.vpc_id}"
-  region              = "${data.aws_region.current.name}"
-  account_id          = "${data.aws_caller_identity.current.account_id}"
-  domain_name         = "${var.name}"
+  project             = var.project
+  vpc_id              = data.aws_subnet.default.vpc_id
+  region              = data.aws_region.current.name
+  account_id          = data.aws_caller_identity.current.account_id
+  domain_name         = var.name
   domain_arn          = "arn:aws:es:${local.region}:${local.account_id}:domain/${local.domain_name}"
-  version             = "${var.elasticsearch_version}"
-  node_instance_type  = "${var.node_instance_type}"
-  node_disk_size      = "${var.node_disk_size}"
-  node_amount         = "${var.node_amount}"
-  subnets             = ["${var.subnets}"]
-  trusted_cidr_blocks = ["${var.trusted_cidr_blocks}"]
-  multi_az            = "${var.multi_az}"
+  version             = var.elasticsearch_version
+  node_instance_type  = var.node_instance_type
+  node_disk_size      = var.node_disk_size
+  node_amount         = var.node_amount
+  subnets             = var.subnets
+  trusted_cidr_blocks = var.trusted_cidr_blocks
+  multi_az            = var.multi_az
 }
