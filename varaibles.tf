@@ -27,22 +27,22 @@ variable "dedicated_master_count" {
 }
 
 variable "index_slow_log_group_arn" {
-  description = "XXX"
+  description = "Index slow logs ARN"
   default     = ""
 }
 
 variable "search_slow_log_group_arn" {
-  description = "XXX"
+  description = "Search slow logs ARN"
   default     = ""
 }
 
 variable "es_application_log_group_arn" {
-  description = "XXX"
+  description = "Error logs ARN"
   default     = ""
 }
 
 variable "audit_log_group_arn" {
-  description = "XXX"
+  description = "Audit logs ARN"
   default     = ""
 }
 
